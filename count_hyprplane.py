@@ -1,4 +1,4 @@
-def get_points(data, modula):
+def get_hyperplane_arrangements(data, modula):
     """
     Input:
         data is The equation that defines the hyperplanes in forms of
@@ -12,8 +12,6 @@ def get_points(data, modula):
     The hyperplanes represented are x + 2y = 3, x + 3y + 4
         modula defines the field we are working on.
         The dimension is inferred from the width of the matrix
-
-
 
 
     return a list res, such that
@@ -69,4 +67,4 @@ data = [
     [1, 3, 4, 0],
     [4, 1, 1, 0],
 ]
-get_points(data, 5)
+get_hyperplane_arrangements(data, 5)
