@@ -62,25 +62,7 @@ A hyperplane arrangment $\Sigma$ with hyperplanes $P_1, P_2, \cdots, P_m$ is sim
 We regard a single point as 0 dimension and the empty set as negative dimension.
 \end{definition}
 
-The following theorem determines condiftion for a hyperplane arrangement to be simple:
-
-\begin{theorem}[Simple Arrangement]
-	An hyperplane arrangement, represented by the matrix $\mathcal{M}$, is simple if and only if any $k \times (n+1) $ submatrix of $\mathcal{M}$, when reduced to row-echelon form, shall contain one row like $[0,0,0, \cdots,0 , 1]$ (This row contains all zero entries except on the last coloumn).
-
-	This means, any submatrix shall be either: 
-	\begin{enumerate}
-		\item be full ranked, or
-		\item have no solution when considered as a system of linear equations.	
-	\end{enumerate}
-\end{theorem}
-
-Here is a corollary:
-
-\begin{corollary}
-	Let matrix $\mathcal{M}$ with integer entries represents a hyperplane arrangement.
-	If the arrangement is simple respect to $\bb{R}^n$, it will be simple respect to any $F_p^n$. 
-	However, if it is simple respect to $F_p^n$, it may not be simple respect to $\bb{R}^n$, or any other $F_{p'}^n$.
-\end{corollary}
+If an arrangement is simple, any $k \times n+1 $submatrix of its matrix form shall either:  (1) full ranked, or (2) have no solution when considered as a system of linear equations.
 
 \subsection{Hyperplane Arrangement in $F_p^n$}
 
@@ -132,15 +114,7 @@ This is how to count:
 
 A unimodular matrix is a matrix such that all of its square submatrix has determinant 1 or -1. In $F_p^n$, we are to investigate hyperplane arrangements which can be represented as a unimodular matrix $\mathcal{M}$. 
 
-$\mathcal{M}$ being a unimodular matrix does not garantees that the arrangement is simple. If this additional condition is imposed, we can have this theorem: 
-
-\begin{theorem}[Number of 0 Dimension Intersection]
-	Let $\mathcal{M}$ represents a simple hyperplane arrangement respect to $\bb{R}$ with only integer entries.
-
-	Assume further that the matrix is unimodular respect to $\bb{R}$, it will also be unimodular for any prime $p$ in $F_p$.
-
-	Then the number of $0$ dimension hyperplane intersections stay unchanged for all prime $p$ regarded in $F_p^n$.
-\end{theorem}
+$\mathcal{M}$ being a unimodular matrix does not garantees that the arrangement is simple. 
 
 \section*{Notation}
 
