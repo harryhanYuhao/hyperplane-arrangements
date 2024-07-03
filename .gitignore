@@ -1,0 +1,12 @@
+# ingoring tex output
+
+*.out 
+*.log
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.ps
+*.fls
+*.gz
+*.fdb*

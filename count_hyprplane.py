@@ -45,7 +45,8 @@ def get_hyperplane_arrangements(data, modula):
             sum = 0
             for j in range(len(i)-1):
                 sum += coor[j] * i[j]
-            if sum % modula == i[-1]:
+            sum += i[-1]
+            if (sum) % modula == 0:
                 count += 1
         # make sure the list is long enough
         while count >= len(res):
@@ -56,15 +57,24 @@ def get_hyperplane_arrangements(data, modula):
     #######
     # display and return
     #######
-    for i, j in enumerate(res):
-        print("{j:>5} points laying on {i} hyperplanes".format(j=j, i=i))
+    # for i, j in enumerate(res):
+    #     print("{j:>5} points laying on {i} hyperplanes".format(j=j, i=i))
 
     return res
 
 
 data = [
-    [1, 2, 3, 1],
-    [1, 3, 4, 0],
-    [4, 1, 1, 0],
+    [1, 0, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0],
+    [0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 1, 0],
 ]
-get_hyperplane_arrangements(data, 5)
+
+print(get_hyperplane_arrangements(data, 2))
+# primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37,
+#           41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+# for i in primes:
+#     res = get_hyperplane_arrangements(data, i)
+#     print("Field: F_{i}: {res}".format(
+#         i=i, res=res))
