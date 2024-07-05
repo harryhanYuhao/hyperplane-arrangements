@@ -17,6 +17,8 @@
 \author{Harry Han}
 \date{\today}
 \renewcommand{\emph}[1]{\textit{\textbf{#1}}}
+\newcommand{\curly}{\mathrel{\leadsto}}
+
 \begin{document}
 \maketitle
 %\tableofcontents
@@ -36,14 +38,15 @@ P =
 \end{bmatrix}
 $$
 
-% TODO: IS THIS MAPPING CONTINUOUS?
-We can define a bijective and and continuous  mapping $\phi: P \rightarrow  \bb{C}^{n-1}$ thus:
-let $c_i$ be none zero, the point $p \in P$ if and only if $p$ can be written as 
+If regarding $\mathbb{C}^n$ as a metric space with the usual metric, 
+we can define a bijective and and continuous  mapping $\phi: P \rightarrow  \bb{C}^{n-1}$ thus:
+let $c_i$ be none zero, we can show that the point $p \in P$ if and only if $p$ can be written as 
 \\
 $(a_1, a_2, \cdots, a_{i-1}, \frac{c_0 + c_1a_1 + \cdots + c_na_n}{-c_i}, a_{i+1}, \cdots, a_n)$.
-We let  
-\\
-$\phi(p) = (a_1, a_2, \cdots, a_{i-1}, a_{i+1}, a_n)$.
+
+Thus, we let  
+$\phi: p \curly (a_1, a_2, \cdots, a_{i-1}, a_{i+1}, a_n)$.
+This is a homeomorphisim. 
 
 Consider a hyperplane arragnement, $\Sigma$, with two different hyperplanes $P, Q$ written in matrix form:
 $$
@@ -70,7 +73,39 @@ $$
 \end{bmatrix}
 $$
 
-The hyperplanes $P$ and $Q$ are the same hyperplanew if and only if the matrix $\mathcal{M}$ is dimension one. Assuming $P$ and $Q$ are different, they may be parallel or they may intersect. 
+\begin{definition}
+	For a hyperplane arrangement represented by $m \times (n+1) $ matrix $\mathcal{M}$, 
+
+	$$
+	\mathcal{M} =
+	\begin{bmatrix}
+		c_{1,1} & c_{1,2} & c_{1,3} & \cdots & c_{1,n} & c_{1,0} \\
+		c_{2,1} & c_{2,2} & c_{2,3} & \cdots & c_{2,n} & c_{2,0} 
+			 \\ \cdots \\
+		c_{m,1} & c_{m,2} & c_{m,3} & \cdots & c_{m,n} & c_{m,0}
+	\end{bmatrix}
+	$$
+	The coefficient matrix $\mathcal{M}_{coef}$ is the $ m \times n$ matrix without the last column, and the constant matrix $\mathcal{M}_{con}$ is the last column. I.e., 
+	$$
+	\mathcal{M}_{coef} =
+	\begin{bmatrix}
+		c_{1,1} & c_{1,2} & c_{1,3} & \cdots & c_{1,n} \\
+		c_{2,1} & c_{2,2} & c_{2,3} & \cdots & c_{2,n} 
+			 \\ \cdots \\
+		c_{n,1} & c_{n,2} & c_{n,3} & \cdots & c_{n,n}
+	\end{bmatrix}
+	, \mathcal{M}_{con} =
+	\begin{bmatrix}
+		c_{1,0} \\
+		c_{2,0} \\
+		\cdots \\
+		c_{n,0}
+	\end{bmatrix}
+	$$
+\end{definition}
+
+The hyperplanes $P$ and $Q$ are the same hyperplane if and only if the matrix $\mathcal{M}$ is dimension one. 
+Assuming $P$ and $Q$ are different, $\mathcal{M}$ will be full ranked. Moreover, $P, Q$ may be parallel or intersect. 
 
 $P$ and $Q$ are parallel if and only if the reduced row echelon form of $\mathcal{M}$ has its second row being $[0, 0, \cdots, 1]$. In such case $\mathcal{M}_{coef}$ is not full ranked. 
 
@@ -88,8 +123,34 @@ We regard a single point as 0 dimension and the empty set as negative dimension.
 The following theorem determines the necessary and sufficient condition for a hyperplane arrangement to be simple:
 
 \begin{theorem}[Simple Arrangement]
-	An hyperplane arrangement, represented by the matrix $\mathcal{M}$, is simple if and only if any $k \times (n+1) $ submatrix of $\mathcal{M}$ be full ranked. One $j \times  k$ matrix is full ranked if its rank is $\max(j,k)$.
+	An hyperplane arrangement, represented by the matrix $\mathcal{M}$, is simple if and only if any $k \times (n+1) $ submatrix of $\mathcal{M}$ be full ranked or contains a row of $[0, 0, \cdots, 0, 1]$ in reduced row echelon form. 
+	A $j \times  k$ matrix is full ranked if its rank is $\max(j,k)$.
 \end{theorem}
+
+\begin{proof}
+	\textbf{Case 1}: if any $k\times (n+1)$ submatrix of $\mathcal{M}$ contains a row of $[0, 0, \cdots, 0, 1]$ in reduced row echelon form, it surely has no solution. 
+
+	If it is full ranked, 
+	let $\mathcal{L}$ be any $k \times (n+1)$ submatrix which represents a subset of hyperplanes in the arrangement.
+
+	There are two subcases to consider: $\mathcal{L}_{coef}$  is full ranked, or $\mathcal{L}$ contains a row of $[0,0,\cdots , 0 ,1]$. 
+	In former case the intersection of the hyperplane can be paramatrised after Guassian Elimination, and must be codimension $k$. In the latter case their will be no solution.
+
+	\textbf{Case 2}: Assuming that one of the submatrix, $\mathcal{L}$, is not full ranked, nor contains a row of $[0, 0, \cdots, 0, 1]$ in reduced row echelon form.
+
+	Let $\mathcal{L}_{reduced}$ be the reduced row echelon from of $\mathcal{L}$.
+		 $\mathcal{L}_{reduced}$ must be of this form:
+			$$
+			\begin{bmatrix}
+				1 & a & b & \cdots &  &  c_1\\
+				0 & 1 & b'' & \cdots &  &  c_2\\
+				\cdots \\
+				0 & 0 & 0 & \cdots & 1 &  c_{m-1}\\
+				0 & 0 & 0 & \cdots & 0 & 0 \\
+			\end{bmatrix}
+			$$
+	Clearly the intersection is not codimension $k$.
+\end{proof}
 
 Here is a corollary:
 
