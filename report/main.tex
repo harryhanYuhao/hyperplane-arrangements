@@ -1,9 +1,11 @@
 \documentclass[12pt, a4paper]{article}
-\usepackage{blindtext, titlesec, amsthm, thmtools, amsmath, amsfonts, scalerel, amssymb, graphicx, titlesec, xcolor, multicol }
+\usepackage{blindtext, titlesec, amsthm, thmtools, amsmath, amsfonts, scalerel, amssymb, graphicx, titlesec, xcolor, multicol, bm}
+\usepackage{mathtools}
 \usepackage[utf8]{inputenc}
 % \hypersetup{colorlinks,linkcolor={red!40!black},citecolor={blue!50!black},urlcolor={blue!80!black}}
 \newtheorem{theorem}{Theorema}[subsection]
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{lem}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollarium}
 \newtheorem{hypothesis}{Coniectura}
 \theoremstyle{definition}
@@ -22,42 +24,48 @@
 \begin{document}
 \maketitle
 %\tableofcontents
-\section{Hyperplane Arrangement}
+\section{Hyperplane Arrangement in $\mathbb{C}^n$}
 
-\subsection{Hyperplane Arrangement in $\bb{C}^n$}
+\subsection{Definitions of Hyperplanes}
 
 We can consider $\bb{C}^n$ as a $n$ dimensional vector space over $\bb{C}$. 
-Hyperplane in it are all the points that satisfy the equaiton: $c_0 + c_1x_1 + c_2x_2 + c_3x_3 + \cdots c_nx_n = 0$, where $c_i, 0 \leq i \leq n, $ are not all zero.
-That is, a hyperplane, $P$, is the algebraic variety $V(c_1x_1 + c_2x_2 + c_3x_3 + \cdots c_nx_n + c_0)$. 
+A hyperplane in $\bb{C}^n$ is the collection of points that satisfy the equation: $c_0 + c_1x_1 + c_2x_2 + c_3x_3 + \cdots c_nx_n = 0$, where $c_i, 0 \leq i \leq n, $ are not all zero. The equivalent definition is that a hyperplane is the algebraic variety $V(c_1x_1 + c_2x_2 + c_3x_3 + \cdots c_nx_n + c_0)$. 
 
-We can write $P$ into a $1\times (n+1)$ matrix: 
+The hyperplane can be represented as a $1\times (n+1)$ matrix recording the coefficients of the equation.
+
 $$
-P = 
+P_m \coloneq 
 \begin{bmatrix}
 	c_1 & c_2 & c_3 & \cdots & c_0
 \end{bmatrix}
 $$
 
-If regarding $\mathbb{C}^n$ as a metric space with the usual metric, 
-we can define a bijective and and continuous  mapping $\phi: P \rightarrow  \bb{C}^{n-1}$ thus:
-let $c_i$ be none zero, we can show that the point $p \in P$ if and only if $p$ can be written as 
-\\
-$(a_1, a_2, \cdots, a_{i-1}, \frac{c_0 + c_1a_1 + \cdots + c_na_n}{-c_i}, a_{i+1}, \cdots, a_n)$.
+we can define a bijective and and continuous  mapping $\phi: P \rightarrow  \bb{C}^{n-1}$ thus (also assuming $c_i, 0 \leq i \leq n, $ are not all zero): 
 
-Thus, we let  
+For any point $p \in \bb{C}^n$, $p$ lies on the hyperplane represented by $P_m$ if and only if $p$ can be written in the form, for certain $a_1, a_2, \cdots, a_n$,
+
+$$ p \coloneq (a_1, a_2, \cdots, a_{i-1}, \frac{c_0 + c_1a_1 + \cdots + c_na_n}{-c_i}, a_{i+1}, \cdots, a_n)$$.
+
+Thus, regarding $\mathbb{C}^n$ as a metric space with the usual metric, we can define homeomorphism
 $\phi: p \curly (a_1, a_2, \cdots, a_{i-1}, a_{i+1}, a_n)$.
-This is a homeomorphisim. 
 
-Consider a hyperplane arragnement, $\Sigma$, with two different hyperplanes $P, Q$ written in matrix form:
+This means that a hyperplane in $\bb{C}^n$ is \emph{homeomorphic} to $\bb{C}^{n-1}$.
+
+\subsection{Hyperplane Arrangements}
+
+A collections of hyperplanes are called \emph{hyperplane arrangements}, which can also be represented by matrices. For clarity, we represent the hyperplane arrangement itself by mathematic caligraphy letter like $\mathcal{M}$, and its matrix by subscript $mat$.
+
+For example:
 $$
-\mathcal{M} = 
+\mathcal{M}_{mat} = 
 \begin{bmatrix}
 	c_{1,1} & c_{1,2} & c_{1,3} & \cdots & c_{1,n} & c_{1,0} \\
 	c_{2,1} & c_{2,2} & c_{2,3} & \cdots & c_{2,n} & c_{2,0}
 \end{bmatrix}
 $$
+represents a hyperplane arrangement $\mathcal{M}$ with two hyperplanes $V(c_{1,1}x_1 + c_{1,2}x_2 + \cdots + c_{1,n}x_n + c_{1,0})$ and $V(c_{2,1}x_1 + c_{2,2}x_2 + \cdots + c_{2,n}x_n + c_{2,0})$.
 
-We can divide this matrix into two parts, the coefficient matrix $\mathcal{M}_{coef}$ and the constant matrix $\mathcal{M}_{con}$:
+$\mathcal{M}_{mat}$ can be divided into coefficient matrix $\mathcal{M}_{coef}$  and and constant matrix $\mathcal{M}_{con}$:
 
 $$
 \mathcal{M}_{coef} =
@@ -73,47 +81,53 @@ $$
 \end{bmatrix}
 $$
 
-\begin{definition}
-	For a hyperplane arrangement represented by $m \times (n+1) $ matrix $\mathcal{M}$, 
+With these notations set, we are ready to investigate more on hyperplane arrangements.
 
-	$$
-	\mathcal{M} =
-	\begin{bmatrix}
-		c_{1,1} & c_{1,2} & c_{1,3} & \cdots & c_{1,n} & c_{1,0} \\
-		c_{2,1} & c_{2,2} & c_{2,3} & \cdots & c_{2,n} & c_{2,0} 
-			 \\ \cdots \\
-		c_{m,1} & c_{m,2} & c_{m,3} & \cdots & c_{m,n} & c_{m,0}
-	\end{bmatrix}
-	$$
-	The coefficient matrix $\mathcal{M}_{coef}$ is the $ m \times n$ matrix without the last column, and the constant matrix $\mathcal{M}_{con}$ is the last column. I.e., 
-	$$
-	\mathcal{M}_{coef} =
-	\begin{bmatrix}
-		c_{1,1} & c_{1,2} & c_{1,3} & \cdots & c_{1,n} \\
-		c_{2,1} & c_{2,2} & c_{2,3} & \cdots & c_{2,n} 
-			 \\ \cdots \\
-		c_{n,1} & c_{n,2} & c_{n,3} & \cdots & c_{n,n}
-	\end{bmatrix}
-	, \mathcal{M}_{con} =
-	\begin{bmatrix}
-		c_{1,0} \\
-		c_{2,0} \\
-		\cdots \\
-		c_{n,0}
-	\end{bmatrix}
-	$$
-\end{definition}
+\subsubsection{Arrangement with Two Hyperplanes}
 
-The hyperplanes $P$ and $Q$ are the same hyperplane if and only if the matrix $\mathcal{M}$ is dimension one. 
-Assuming $P$ and $Q$ are different, $\mathcal{M}$ will be full ranked. Moreover, $P, Q$ may be parallel or intersect. 
+Let $\mathcal{M}$ be an arrangement with two hyperplanes, $P$ and $Q$. 
+Let $P = V(c_{1,1}x_1 + c_{1,2}x_2 + \cdots + c_{1,n}x_n + c_{1,0})$ and $Q = V(c_{2,1}x_1 + c_{2,2}x_2 + \cdots + c_{2,n}x_n + c_{2,0})$.
 
-$P$ and $Q$ are parallel if and only if the reduced row echelon form of $\mathcal{M}$ has its second row being $[0, 0, \cdots, 1]$. In such case $\mathcal{M}_{coef}$ is not full ranked. 
+The corresponding matrix for $\mathcal{M}$ is
+$$
+\mathcal{M}_{mat} = 
+\begin{bmatrix}
+	c_{1,1} & c_{1,2} & c_{1,3} & \cdots & c_{1,n} & c_{1,0} \\
+	c_{2,1} & c_{2,2} & c_{2,3} & \cdots & c_{2,n} & c_{2,0}
+\end{bmatrix}
+$$
 
-If $\mathcal{M}_{coef}$ is full ranked, it is clear that $P$ and $Q$ intersect, and their intersection is codimension 2.
+Let us investigate if they are the same hyperplane, or, if they are disctinct, whether they intersect. 
+Indeed, all we need to do is to solve this system of linear equation:
+\begin{equation}\label{eq:2equation}
+	\mathcal{M}_{coef} \bm{x} = - \mathcal{M}_{con}
+\end{equation}
 
-Thus, when $\mathcal{M}$ is full ranked, the hyperplanes $P$ and $Q$, if intersect, has a codimension 2 intersection. we call this hyperplane arrangement simple. 
+$P$ and $Q$ will represent the same hyperplane if and only if 
 
-We can extend this definition for arrangements with more hyperplanes:
+$$
+[c_{1,1}, c_{1,2}, \cdots c_{1,0}] = k [c_{2,1}, c_{2,2}, \cdots, c_{2, 0}]
+$$
+
+for some constant $k$. 
+In such case $\mathcal{M}_{mat}$ is dimension 1, so $P$ and $Q$ are distinct hyperplanes precisely when $\mathcal{M}$ will be full ranked. 
+
+Provided $P, Q$ are distinct, they may or may not intersect. 
+If they do not intersect (that is, $P \cap Q = \varnothing$), they are \emph{parallel}.
+
+$P$ and $Q$ are parallel precisely when $\ref{eq:2equation}$ has no solution; this means the second row of the reduced row echelon form of $\mathcal{M}$ must be $[0, 0, \cdots, 1]$. In such case $\mathcal{M}_{coef}$ is dimension 1.
+
+If $\mathcal{M}_{coef}$ is full ranked, $\mathcal{M}_{cat}$ will also be full ranked, thus $P$ and $Q$ are distinct and will intersect. 
+Gaussian Elimination also tell us that $P \cap U$ will be codimension 2.
+
+We can extend our rational for arrangements with more than two hyperplanes.
+
+\subsubsection{More than Two Hyperplanes}
+
+Let $\mathcal{M}$ be an arrangement with $m$ hyperplanes in $\bb{C}^n$. 
+
+The $m$ hyperplanes are all distinct precisely when every $2\times (n+1)$ submatrix of $\mathcal{M}_{mat}$ is full ranked. 
+This condition is different from $\mathcal{M}_{mat}$ is full ranked.
 
 \begin{definition}[Simple Arrangement]
 A hyperplane arrangment $\Sigma$ with hyperplanes $P_1, P_2, \cdots, P_m$ is simple if any non-empty interestion of $k$ hyperplanes is codimension $k$.
@@ -128,6 +142,7 @@ The following theorem determines the necessary and sufficient condition for a hy
 \end{theorem}
 
 \begin{proof}
+{\color{red} This is a general comment. We don't need to divide into two cases. We actually prove forward and backward direction of the statement.}
 	\textbf{Case 1}: if any $k\times (n+1)$ submatrix of $\mathcal{M}$ contains a row of $[0, 0, \cdots, 0, 1]$ in reduced row echelon form, it surely has no solution. 
 
 	If it is full ranked, 
@@ -160,13 +175,13 @@ Here is a corollary:
 	However, if it is simple respect to $\mathbb{F}_p^n$, it may not be simple respect to $\bb{R}^n$, or any other $\mathbb{F}_{p'}^n$.
 \end{corollary}
 
-\subsection{Hyperplane Arrangement in $\mathbb{F}_p^n$}
+\section{Hyperplane Arrangement in $\mathbb{F}_p^n$}
 
 We can also work on $\mathbb{F}_p^n$ and consider it as an $n$ dimension vector space over the field $\mathbb{F}_p$. 
 
 Our theory in the previous section can be extended to $\mathbb{F}_p^n$.
 
-\subsubsection{Definitions and Properties of $\mathbb{F}_p^n$}
+\subsection{Definitions and special Properties of $\mathbb{F}_p^n$}
 
 A hyperplane in $\mathbb{F}_p^n$ is a $n-1$ dimension affine space represented as the algebraic variety $V(c_0 + c_1x_1 + c_2x_2 + c_3x_3 \cdots + c_nx_n)$, where at least one of the $c_i, 0 \leq i \leq n,$ is non-zero. 
 All hyperplanes of $\mathbb{F}_p^n$ are $n-1$ dimension affine space and are isomorphic to $\mathbb{F}_p^{n-1}$. In a simple arrangement, the intersection of $k$ hyperplanes is a $n-k$ dimension affine space.
@@ -186,7 +201,8 @@ By \emph{strictly intersection} of $k$ hyperplanes we mean a point lays on $k$ h
 	If $p$ belongs to the strictly intersection of $k$ hyperplanes if it is on $k$ hyperplanes but not on $k+1$ hyperplanes.
 \end{definition}
 
-\subsubsection{Counting, One, Two, Three}
+\subsection{Counting, One, Two, Three}
+
 Let us first count how many codimension $k$ intersection there are in a simple hyperplane arrangement.
 
 \begin{theorem}[Counting Codimension $k$ Intersections]
@@ -231,10 +247,81 @@ $\mathcal{M}$ being a unimodular matrix does not garantees that the arrangement 
 	Then the number of $0$ dimension hyperplane intersections stay unchanged for all prime $p$ regarded in $\mathbb{F}_p^n$.
 \end{theorem}
 
-\section*{Notation}
+\section*{Notations and Definitions}
 
 \begin{enumerate}
 	\item $C(n, k) = \frac{n!}{k!(n-k)!}$, that is $n$ choose $k$.
+	\item Coefficient matrix and constant matrix: 
+	For a hyperplane arrangement represented by $m \times (n+1) $ matrix $\mathcal{M}$, 
+
+	$$
+	\mathcal{M} =
+	\begin{bmatrix}
+		c_{1,1} & c_{1,2} & c_{1,3} & \cdots & c_{1,n} & c_{1,0} \\
+		c_{2,1} & c_{2,2} & c_{2,3} & \cdots & c_{2,n} & c_{2,0} 
+			 \\ \cdots \\
+		c_{m,1} & c_{m,2} & c_{m,3} & \cdots & c_{m,n} & c_{m,0}
+	\end{bmatrix}
+	$$
+	The coefficient matrix $\mathcal{M}_{coef}$ is the $ m \times n$ matrix without the last column, and the constant matrix $\mathcal{M}_{con}$ is the last column. I.e., 
+	$$
+	\mathcal{M}_{coef} =
+	\begin{bmatrix}
+		c_{1,1} & c_{1,2} & c_{1,3} & \cdots & c_{1,n} \\
+		c_{2,1} & c_{2,2} & c_{2,3} & \cdots & c_{2,n} 
+			 \\ \cdots \\
+		c_{n,1} & c_{n,2} & c_{n,3} & \cdots & c_{n,n}
+	\end{bmatrix}
+	, \mathcal{M}_{con} =
+	\begin{bmatrix}
+		c_{1,0} \\
+		c_{2,0} \\
+		\cdots \\
+		c_{n,0}
+	\end{bmatrix}
+	$$
 \end{enumerate}
+
+\subsection{Central Hyperplane arrangement}
+
+Let $N=\{n_1, \dots, n_k\}$ be a collection of primitive integral vectors such that none of $n_i$'s is scalar multiple of the other. Suppose that there exists a hyperplane arrangement $\mathbb{V}$ with the following condition:
+\begin{enumerate}
+    \item a collection of normal vectors of real hyperplanes in $\mathbb{V}$ is $N$.
+    \item there exists a unique compact chamber. 
+\end{enumerate}
+We call such a collection of integral vectors $N$ \emph{central}. Then we define a hyperplane arrangement $\mathbb{V}$ to be central if the collection of integral primitive normal vectors is central. 
+
+Let $\Sigma$ be a complete unimodular fan. We call $\Sigma$ \emph{minimal} if it has no complete unimodular subfan $\Sigma'$ such that $\Sigma[1] \subset \Sigma'[1]$. 
+\begin{lem}
+    If $\Sigma$ is a minimal complete unimodular fan, then $\Sigma$ is a fan associated to a product of projective spaces. 
+\end{lem}
+\begin{proof}
+    Let $\rho_1, \dots, \rho_k$ be primitive rays of $\Sigma \subset \mathbb{R}^d$. Without loss of generality, we may assume that the first $d$ rays correspond to the standard basis. First the minimality condition implies that $d+1 \leq k \leq 2d$. If $k=d+1$, then $\rho_{d+1}=-\rho_1 + \cdots + -\rho_d$ since $\Sigma$ is unimodular and complete. If $k=d+2$, then both $-\rho_{d+1}$ and $-\rho_{d+2}$ should belong to the standard cone spanned by $\rho_1, \cdots, \rho_d$. If $-\rho_{d+1}$ belongs to the minimal cone $c_I$, then the minimal cone containing $-\rho_{d+2}$ must be $c_{I^c}$. In this case, the associated toric variety is $\mathbb{CP}^{|I|} \times \mathbb{CP}^{d-|I|}$. Similar arguement for other values of $k$. We leave it to the reader. 
+\end{proof}
+
+\begin{lem}
+    If $\Sigma$ is a minimal complete unimodular fan, then there exists a simple and unimodular hyperplane arrangement $\mathbb{V}$ which has a unique compact chamber whose normal fan is $\Sigma$. 
+\end{lem}
+\begin{proof}
+    The construction part is obvious. It is enough to show that other chambers are non-compact. In this case, the number of hyperplanes is the same as the number of ray generators. Hence, the minimiality implies that all other chamers are non-compact. 
+\end{proof}
+The converse statment is true. 
+
+\begin{lem}
+    Let $\mathbb{V}$ be a simple and unimodular hyperplane arrangement. If $\mathbb{V}$ has a unique compact chamber, then normal fan of that compact chamber is a minimal complete unimodular fan. 
+\end{lem}
+
+\begin{proof}
+    Let $\Delta$ be a unique chamber and $\Sigma=\mathrm{nf}(\Delta)$ be a normal fan. Suppose that $\Sigma$ is not minimal. Then there exists a complete unimodular subfan $\Sigma' \subset \Sigma$ with $\Sigma[1] \subset \Sigma'[1]$. Let $\rho_1, \dots, \rho_k$ be a ray generators in $\Sigma \setminus \Sigma'$. There exists a cone $C$ in $\Sigma$ which contains at least one of such $\rho_i$'s. Then the hyperplanes corresponding to rays of $C$ and such a $\rho_i$ form a bounded chamber. 
+\end{proof}
+
+Due to above lemmas, one can see that every central simple and unimodular hyperplane arrangement can be constructed by adding parallel hyperplanes to the one that has a unique compact chamber corresponding to a product of projective spaces. Therefore, for a parition $\underline{d}$, we say a central simple and unimodular hyperplane arrangement is \emph{of type $\underline{d}$} is the unique compact chamber corresponds to $\Delta^{\underline{d}}$. In particular, when $\underline{d}=d$, we call it \emph{maximal type}. 
+
+\begin{example}
+    Consider $\mathbb{R}^2$ with $5$ hyperplanes, $\{x=0\}, \{x=1\},\{y=0\},\{y=1\},\{x+y=3\}$. This can be obtained from a central simple and unimodular hyperplane arrangement whose unique compact chamber is either a square or a $2$-simplex. This is of type $\underline{d}=d=2$. 
+\end{example}
+
+\textbf{Question} Count the number of minimial unimodular fans in general, beyond the central case. 
+
 
 \end{document}
