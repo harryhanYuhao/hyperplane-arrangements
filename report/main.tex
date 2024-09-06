@@ -15,7 +15,7 @@
 \newtheorem{example}{Exampli Gratia}[section]
 \newcommand{\bb}[1]{\mathbb{#1}}
 \renewcommand\qedsymbol{Q.E.D.}
-\title{Hyperplan Arrangements}
+\title{Some Properties of Simple Hyperplane Arrangements}
 \author{Harry Han}
 \date{\today}
 \renewcommand{\emph}[1]{\textit{\textbf{#1}}}
@@ -118,7 +118,7 @@ If they do not intersect (that is, $P \cap Q = \varnothing$), they are \emph{par
 $P$ and $Q$ are parallel precisely when $\ref{eq:2equation}$ has no solution; this means the second row of the reduced row echelon form of $\mathcal{M}$ must be $[0, 0, \cdots, 1]$. In such case $\mathcal{M}_{coef}$ is dimension 1.
 
 If $\mathcal{M}_{coef}$ is full ranked, $\mathcal{M}_{cat}$ will also be full ranked, thus $P$ and $Q$ are distinct and will intersect. 
-Gaussian Elimination also tell us that $P \cap U$ will be codimension 2.
+Gaussian Elimination tells us that $P \cap U$ will be codimension 2. Arrangments like this are \emph{simple}.
 
 We can extend our rational for arrangements with more than two hyperplanes.
 
@@ -127,23 +127,20 @@ We can extend our rational for arrangements with more than two hyperplanes.
 Let $\mathcal{M}$ be an arrangement with $m$ hyperplanes in $\bb{C}^n$. 
 
 The $m$ hyperplanes are all distinct precisely when every $2\times (n+1)$ submatrix of $\mathcal{M}_{mat}$ is full ranked. 
-This condition is different from $\mathcal{M}_{mat}$ is full ranked.
+Note this condition is different from $\mathcal{M}_{mat}$ is full ranked.
 
-\begin{definition}[Simple Arrangement]
-A hyperplane arrangment $\Sigma$ with hyperplanes $P_1, P_2, \cdots, P_m$ is simple if any non-empty interestion of $k$ hyperplanes is codimension $k$.
-We regard a single point as 0 dimension and the empty set as negative dimension.
-\end{definition}
+We define $\mathcal{M}$ to be a simple arrangement if the intersection of any $k$ hyperplanes of $\mathcal{M}$, if exists, is codimension $k$.
 
 The following theorem determines the necessary and sufficient condition for a hyperplane arrangement to be simple:
 
 \begin{theorem}[Simple Arrangement]
-	An hyperplane arrangement, represented by the matrix $\mathcal{M}$, is simple if and only if any $k \times (n+1) $ submatrix of $\mathcal{M}$ be full ranked or contains a row of $[0, 0, \cdots, 0, 1]$ in reduced row echelon form. 
+	\label{th:simple_arrangement}
+	A hyperplane arrangement, $\mathcal{M}$, in $\bb{C}^n$ is simple if and only if any $k \times (n+1) $ submatrix of $\mathcal{M}$ is full ranked or contains a row of $[0, 0, \cdots, 0, 1]$ in reduced row echelon form. 
 	A $j \times  k$ matrix is full ranked if its rank is $\max(j,k)$.
 \end{theorem}
 
 \begin{proof}
-{\color{red} This is a general comment. We don't need to divide into two cases. We actually prove forward and backward direction of the statement.}
-	\textbf{Case 1}: if any $k\times (n+1)$ submatrix of $\mathcal{M}$ contains a row of $[0, 0, \cdots, 0, 1]$ in reduced row echelon form, it surely has no solution. 
+	\textbf{Backward Direction}: if any $k\times (n+1)$ submatrix of $\mathcal{M}$ contains a row of $[0, 0, \cdots, 0, 1]$ in reduced row echelon form, it surely has no solution. 
 
 	If it is full ranked, 
 	let $\mathcal{L}$ be any $k \times (n+1)$ submatrix which represents a subset of hyperplanes in the arrangement.
@@ -151,7 +148,9 @@ The following theorem determines the necessary and sufficient condition for a hy
 	There are two subcases to consider: $\mathcal{L}_{coef}$  is full ranked, or $\mathcal{L}$ contains a row of $[0,0,\cdots , 0 ,1]$. 
 	In former case the intersection of the hyperplane can be paramatrised after Guassian Elimination, and must be codimension $k$. In the latter case their will be no solution.
 
-	\textbf{Case 2}: Assuming that one of the submatrix, $\mathcal{L}$, is not full ranked, nor contains a row of $[0, 0, \cdots, 0, 1]$ in reduced row echelon form.
+	\textbf{Forward Direction}: Instead of proving directly the forward direction, let us prove its contrapositive. 
+
+	Assuming one of the $k \times (n+1)$ submatrix, $\mathcal{L}$, is not full ranked, nor contains a row of $[0, 0, \cdots, 0, 1]$ in reduced row echelon form.
 
 	Let $\mathcal{L}_{reduced}$ be the reduced row echelon from of $\mathcal{L}$.
 		 $\mathcal{L}_{reduced}$ must be of this form:
@@ -170,46 +169,61 @@ The following theorem determines the necessary and sufficient condition for a hy
 Here is a corollary:
 
 \begin{corollary}
-	Let matrix $\mathcal{M}$ with integer entries represents a hyperplane arrangement.
-	If the arrangement is simple respect to $\bb{R}^n$, it will be simple respect to any $\mathbb{F}_p^n$. 
-	However, if it is simple respect to $\mathbb{F}_p^n$, it may not be simple respect to $\bb{R}^n$, or any other $\mathbb{F}_{p'}^n$.
+	\label{cor:intersection of m hyperplanes}
+	To find the number of intersection of $m$ hyerplanes in simple arragement $\mathcal{M}$, we just need to count the number of full ranked $m \times (n+1)$ submatrices of $\mathcal{M}_{mat}$. 
 \end{corollary}
 
 \section{Hyperplane Arrangement in $\mathbb{F}_p^n$}
 
-We can also work on $\mathbb{F}_p^n$ and consider it as an $n$ dimension vector space over the field $\mathbb{F}_p$. 
+Our theory in the previous section can be extended for any vector space. 
+In this section let us consider hyperplane arrangements in $\mathbb{F}_p^n$.
 
-Our theory in the previous section can be extended to $\mathbb{F}_p^n$.
 
 \subsection{Definitions and special Properties of $\mathbb{F}_p^n$}
 
 A hyperplane in $\mathbb{F}_p^n$ is a $n-1$ dimension affine space represented as the algebraic variety $V(c_0 + c_1x_1 + c_2x_2 + c_3x_3 \cdots + c_nx_n)$, where at least one of the $c_i, 0 \leq i \leq n,$ is non-zero. 
-All hyperplanes of $\mathbb{F}_p^n$ are $n-1$ dimension affine space and are isomorphic to $\mathbb{F}_p^{n-1}$. In a simple arrangement, the intersection of $k$ hyperplanes is a $n-k$ dimension affine space.
-% TODO: PROVE THE LAST SENTENCE
+All hyperplanes of $\mathbb{F}_p^n$ are $n-1$ dimension affine space and are isomorphic to $\mathbb{F}_p^{n-1}$. 
+In a simple arrangement, the intersection of $k$ hyperplanes, if exists, is an $n-k$ dimension affine space.
 
 As a finite field, we can count number of points in any affine subspace of $\mathbb{F}_p^n$. 
 
+The following observation is important:
+
 \begin{theorem}[Affine Spaces in $\mathbb{F}_p^n$]
+	\label{th:f_p affine space}
 	Any $m$ dimensional affine subspace of $\mathbb{F}_p^n$ defined as $V(c_0 + c_1x_1+c_2x_2 + \cdots + c_nx_n; d_0 + d_1x_1 + \cdots d_nx_n; \cdots)$ are isomorphic to $\mathbb{F}_p^m$. In particular, they have $p^m$ element.
 \end{theorem}
 
+\begin{proof}
+	This is an elementary result that any $m$ dimensional affine subspace of $\mathbb{F}_p^n$ is isomorphic to $m$ dimensional vector subspace. Let us now count how many distinct points there are.
+	A $m$ dimension vector subspaces has $m$ basis, $b_1, b_2, \cdots, b_m$, and an element belongs to it precisely when it can be written as
+		$ c_1b_1 + c_2b_2, \cdots + c_m b_m $,
+	for $c_i \in \mathbb{F}_p, 1\leq i \leq m $.
+
+	For any different choice of $c_i s$, the sum will be different. (As $b_i$ are basis) Each $c_i$ has $p$ options to choose from, so there are total of $p^m$ number of elements.
+\end{proof}
+
 It is natural to ask how many points of intersections there are in a hyperplane arrangement. 
 Specifically, in an arrangement with $m$ hyperplanes we are interested in how many points of intersections are strictly on $0, 1, 2, \cdots m$ hyperplanes. 
-By \emph{strictly intersection} of $k$ hyperplanes we mean a point lays on $k$ hyperplanes but not on $k+1$ hyperplanes. 
-
-\begin{definition}[Strictly Intersection]
-	If $p$ belongs to the strictly intersection of $k$ hyperplanes if it is on $k$ hyperplanes but not on $k+1$ hyperplanes.
-\end{definition}
+By \emph{strictly intersection}, we mean a point belongs to the intersection of $k$ hyperplanes but not on $k+1$ hyperplanes. 
 
 \subsection{Counting, One, Two, Three}
 
+Provided a hyperplane arrangement $\mathcal{M}$ with $m$ hyperplanes. 
 Let us first count how many codimension $k$ intersection there are in a simple hyperplane arrangement.
 
 \begin{theorem}[Counting Codimension $k$ Intersections]
-	
+	The number of codimension $k$ intersection in the simple hyperplane arrangement $\mathcal{M}$ of $m$ hyperplanes is the number of fully ranked $k \times n$ submatrices of $\mathcal{M}_{coef}$.
 \end{theorem}
 
-This is how to count:
+\begin{proof}
+	Since the arrangement is simple, any codimension $k$ intersection must be the intersection of $k$ hyperplanes. 
+	Simple arrangement does not guarentee the intersection of any $k$ hyperplanes exists. As shown in theorem \ref{th:simple_arrangement}, the sufficient condition of $k$ hyperplanes to intersect is that the corresponding $M_{coef}$ is fully ranked. 
+	
+	Thus we only need to count the fully ranked $k \times n$ submatrices.
+\end{proof}
+
+This is how to count the number of strictly intersection points.
 
 \begin{theorem}[The Counting Theorem]
 	Assuming $\Sigma$ is a simple hyperplane arrangement in $\mathbb{F}_p^n$ consists of $m$ hyperplane represented by the matrix $\mathcal{M}$. 
@@ -233,19 +247,26 @@ This is how to count:
 	\end{equation}
 \end{theorem}
 
-\section{Unimodular Matrix}
+\begin{proof}
+	The rationale is straight forward. 
+	We first count how many strictly intersection of $m$ hyperplanes there are by \ref{cor:intersection of m hyperplanes}. 
+	By $\ref{th:f_p affine space}$ we know the intersection will be isomorphic to codimension $m$ sub vector space, and $p^m$ points will lay on it. In the end just remember to substract points that are already counted.
+\end{proof}
 
-A unimodular matrix is a matrix such that all of its square submatrix has determinant 1 or -1. In $\mathbb{F}_p^n$, we are to investigate hyperplane arrangements which can be represented as a unimodular matrix $\mathcal{M}$. 
-
-$\mathcal{M}$ being a unimodular matrix does not garantees that the arrangement is simple. If this additional condition is imposed, we can have this theorem: 
-
-\begin{theorem}[Number of 0 Dimension Intersection]
-	Let $\mathcal{M}$ represents a simple hyperplane arrangement respect to $\bb{R}$ with only integer entries.
-
-	Assume further that the matrix is unimodular respect to $\bb{R}$, it will also be unimodular for any prime $p$ in $\mathbb{F}_p$.
-
-	Then the number of $0$ dimension hyperplane intersections stay unchanged for all prime $p$ regarded in $\mathbb{F}_p^n$.
-\end{theorem}
+% \section{Unimodular Matrix}
+%
+% A unimodular matrix is a matrix such that all of its square submatrix has determinant 1 or -1. In $\mathbb{F}_p^n$, we are to investigate hyperplane arrangements which can be represented as a unimodular matrix $\mathcal{M}$. 
+%
+% $\mathcal{M}$ being a unimodular matrix does not garantees that the arrangement is simple. If this additional condition is imposed, we can have this theorem: 
+%
+% \begin{theorem}[Number of 0 Dimension Intersection]
+% 	Let $\mathcal{M}$ represents a simple hyperplane arrangement respect to $\bb{R}$ with only integer entries.
+%
+% 	Assume further that the matrix is unimodular respect to $\bb{R}$, it will also be unimodular for any prime $p$ in $\mathbb{F}_p$.
+%
+% 	Then the number of $0$ dimension hyperplane intersections stay unchanged for all prime $p$ regarded in $\mathbb{F}_p^n$.
+% \end{theorem}
+%
 
 \section*{Notations and Definitions}
 
@@ -282,46 +303,55 @@ $\mathcal{M}$ being a unimodular matrix does not garantees that the arrangement 
 	$$
 \end{enumerate}
 
-\subsection{Central Hyperplane arrangement}
+\begin{definition}[Simple Arrangement]
+A hyperplane arrangment $\Sigma$ is simple if any non-empty interestion of $k$ hyperplanes is codimension $k$.
+We regard a single point as 0 dimension and the empty set as negative dimension.
+\end{definition}
 
-Let $N=\{n_1, \dots, n_k\}$ be a collection of primitive integral vectors such that none of $n_i$'s is scalar multiple of the other. Suppose that there exists a hyperplane arrangement $\mathbb{V}$ with the following condition:
-\begin{enumerate}
-    \item a collection of normal vectors of real hyperplanes in $\mathbb{V}$ is $N$.
-    \item there exists a unique compact chamber. 
-\end{enumerate}
-We call such a collection of integral vectors $N$ \emph{central}. Then we define a hyperplane arrangement $\mathbb{V}$ to be central if the collection of integral primitive normal vectors is central. 
+\begin{definition}[Strictly Intersection]
+	If $p$ belongs to the strictly intersection of $k$ hyperplanes if it is on $k$ hyperplanes but not on $k+1$ hyperplanes.
+\end{definition}
 
-Let $\Sigma$ be a complete unimodular fan. We call $\Sigma$ \emph{minimal} if it has no complete unimodular subfan $\Sigma'$ such that $\Sigma[1] \subset \Sigma'[1]$. 
-\begin{lem}
-    If $\Sigma$ is a minimal complete unimodular fan, then $\Sigma$ is a fan associated to a product of projective spaces. 
-\end{lem}
-\begin{proof}
-    Let $\rho_1, \dots, \rho_k$ be primitive rays of $\Sigma \subset \mathbb{R}^d$. Without loss of generality, we may assume that the first $d$ rays correspond to the standard basis. First the minimality condition implies that $d+1 \leq k \leq 2d$. If $k=d+1$, then $\rho_{d+1}=-\rho_1 + \cdots + -\rho_d$ since $\Sigma$ is unimodular and complete. If $k=d+2$, then both $-\rho_{d+1}$ and $-\rho_{d+2}$ should belong to the standard cone spanned by $\rho_1, \cdots, \rho_d$. If $-\rho_{d+1}$ belongs to the minimal cone $c_I$, then the minimal cone containing $-\rho_{d+2}$ must be $c_{I^c}$. In this case, the associated toric variety is $\mathbb{CP}^{|I|} \times \mathbb{CP}^{d-|I|}$. Similar arguement for other values of $k$. We leave it to the reader. 
-\end{proof}
-
-\begin{lem}
-    If $\Sigma$ is a minimal complete unimodular fan, then there exists a simple and unimodular hyperplane arrangement $\mathbb{V}$ which has a unique compact chamber whose normal fan is $\Sigma$. 
-\end{lem}
-\begin{proof}
-    The construction part is obvious. It is enough to show that other chambers are non-compact. In this case, the number of hyperplanes is the same as the number of ray generators. Hence, the minimiality implies that all other chamers are non-compact. 
-\end{proof}
-The converse statment is true. 
-
-\begin{lem}
-    Let $\mathbb{V}$ be a simple and unimodular hyperplane arrangement. If $\mathbb{V}$ has a unique compact chamber, then normal fan of that compact chamber is a minimal complete unimodular fan. 
-\end{lem}
-
-\begin{proof}
-    Let $\Delta$ be a unique chamber and $\Sigma=\mathrm{nf}(\Delta)$ be a normal fan. Suppose that $\Sigma$ is not minimal. Then there exists a complete unimodular subfan $\Sigma' \subset \Sigma$ with $\Sigma[1] \subset \Sigma'[1]$. Let $\rho_1, \dots, \rho_k$ be a ray generators in $\Sigma \setminus \Sigma'$. There exists a cone $C$ in $\Sigma$ which contains at least one of such $\rho_i$'s. Then the hyperplanes corresponding to rays of $C$ and such a $\rho_i$ form a bounded chamber. 
-\end{proof}
-
-Due to above lemmas, one can see that every central simple and unimodular hyperplane arrangement can be constructed by adding parallel hyperplanes to the one that has a unique compact chamber corresponding to a product of projective spaces. Therefore, for a parition $\underline{d}$, we say a central simple and unimodular hyperplane arrangement is \emph{of type $\underline{d}$} is the unique compact chamber corresponds to $\Delta^{\underline{d}}$. In particular, when $\underline{d}=d$, we call it \emph{maximal type}. 
-
-\begin{example}
-    Consider $\mathbb{R}^2$ with $5$ hyperplanes, $\{x=0\}, \{x=1\},\{y=0\},\{y=1\},\{x+y=3\}$. This can be obtained from a central simple and unimodular hyperplane arrangement whose unique compact chamber is either a square or a $2$-simplex. This is of type $\underline{d}=d=2$. 
-\end{example}
-
-\textbf{Question} Count the number of minimial unimodular fans in general, beyond the central case. 
-
-
+% \subsection{Central Hyperplane arrangement}
+%
+% Let $N=\{n_1, \dots, n_k\}$ be a collection of primitive integral vectors such that none of $n_i$'s is scalar multiple of the other. Suppose that there exists a hyperplane arrangement $\mathbb{V}$ with the following condition:
+% \begin{enumerate}
+%     \item a collection of normal vectors of real hyperplanes in $\mathbb{V}$ is $N$.
+%     \item there exists a unique compact chamber. 
+% \end{enumerate}
+% We call such a collection of integral vectors $N$ \emph{central}. Then we define a hyperplane arrangement $\mathbb{V}$ to be central if the collection of integral primitive normal vectors is central. 
+%
+% Let $\Sigma$ be a complete unimodular fan. We call $\Sigma$ \emph{minimal} if it has no complete unimodular subfan $\Sigma'$ such that $\Sigma[1] \subset \Sigma'[1]$. 
+% \begin{lem}
+%     If $\Sigma$ is a minimal complete unimodular fan, then $\Sigma$ is a fan associated to a product of projective spaces. 
+% \end{lem}
+% \begin{proof}
+%     Let $\rho_1, \dots, \rho_k$ be primitive rays of $\Sigma \subset \mathbb{R}^d$. Without loss of generality, we may assume that the first $d$ rays correspond to the standard basis. First the minimality condition implies that $d+1 \leq k \leq 2d$. If $k=d+1$, then $\rho_{d+1}=-\rho_1 + \cdots + -\rho_d$ since $\Sigma$ is unimodular and complete. If $k=d+2$, then both $-\rho_{d+1}$ and $-\rho_{d+2}$ should belong to the standard cone spanned by $\rho_1, \cdots, \rho_d$. If $-\rho_{d+1}$ belongs to the minimal cone $c_I$, then the minimal cone containing $-\rho_{d+2}$ must be $c_{I^c}$. In this case, the associated toric variety is $\mathbb{CP}^{|I|} \times \mathbb{CP}^{d-|I|}$. Similar arguement for other values of $k$. We leave it to the reader. 
+% \end{proof}
+%
+% \begin{lem}
+%     If $\Sigma$ is a minimal complete unimodular fan, then there exists a simple and unimodular hyperplane arrangement $\mathbb{V}$ which has a unique compact chamber whose normal fan is $\Sigma$. 
+% \end{lem}
+% \begin{proof}
+%     The construction part is obvious. It is enough to show that other chambers are non-compact. In this case, the number of hyperplanes is the same as the number of ray generators. Hence, the minimiality implies that all other chamers are non-compact. 
+% \end{proof}
+% The converse statment is true. 
+%
+% \begin{lem}
+%     Let $\mathbb{V}$ be a simple and unimodular hyperplane arrangement. If $\mathbb{V}$ has a unique compact chamber, then normal fan of that compact chamber is a minimal complete unimodular fan. 
+% \end{lem}
+%
+% \begin{proof}
+%     Let $\Delta$ be a unique chamber and $\Sigma=\mathrm{nf}(\Delta)$ be a normal fan. Suppose that $\Sigma$ is not minimal. Then there exists a complete unimodular subfan $\Sigma' \subset \Sigma$ with $\Sigma[1] \subset \Sigma'[1]$. Let $\rho_1, \dots, \rho_k$ be a ray generators in $\Sigma \setminus \Sigma'$. There exists a cone $C$ in $\Sigma$ which contains at least one of such $\rho_i$'s. Then the hyperplanes corresponding to rays of $C$ and such a $\rho_i$ form a bounded chamber. 
+% \end{proof}
+%
+% Due to above lemmas, one can see that every central simple and unimodular hyperplane arrangement can be constructed by adding parallel hyperplanes to the one that has a unique compact chamber corresponding to a product of projective spaces. Therefore, for a parition $\underline{d}$, we say a central simple and unimodular hyperplane arrangement is \emph{of type $\underline{d}$} is the unique compact chamber corresponds to $\Delta^{\underline{d}}$. In particular, when $\underline{d}=d$, we call it \emph{maximal type}. 
+%
+% \begin{example}
+%     Consider $\mathbb{R}^2$ with $5$ hyperplanes, $\{x=0\}, \{x=1\},\{y=0\},\{y=1\},\{x+y=3\}$. This can be obtained from a central simple and unimodular hyperplane arrangement whose unique compact chamber is either a square or a $2$-simplex. This is of type $\underline{d}=d=2$. 
+% \end{example}
+%
+% \textbf{Question} Count the number of minimial unimodular fans in general, beyond the central case. 
+%
+%
 \end{document}
